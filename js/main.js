@@ -1,3 +1,5 @@
+/*PUEDES CONSULTAR STOCK EN TODAS LAS PAGES*/
+
 const stockRemeras = [
     // Remeras
     {
@@ -82,4 +84,10 @@ const stockPantalones = [
       precio: 50000
     }
 ];
-  
+
+/*Page CONTACTO*/
+
+//config de el boton
+let  botonEnviar = document.getElementById("boton-enviar")
+
+botonEnviar.addEventListener("click", ()=>alert("Sus datos han sido enviados satisfactoriamente"))
