@@ -1,5 +1,18 @@
 /*PUEDES CONSULTAR STOCK EN TODAS LAS PAGES*/
 
+let nombre = "";
+
+while (nombre.trim() === "") {
+  nombre = prompt("Ingresa Tu Nombre:");
+
+  nombre = nombre.toUpperCase(); //todo el nombre en mayuscula
+
+  if (nombre.trim() === "") {
+    alert("No ingresaste ningun dato. intentalo de nuevo.");
+  }
+}
+    alert(`¡Bienvenido ${nombre}!`);
+
 const stockRemeras = [
     // Remeras
     {
@@ -85,9 +98,51 @@ const stockPantalones = [
     }
 ];
 
+/*Mi intento de un carrito de compras funcional*/ 
+
+const cart = [];
+
+// Añadir al carrito
+document.querySelectorAll('.add-to-cart').forEach(button=>{
+    button.addEventListener('click', () => {
+        const item = {
+            id: button.dataset.id,
+            name: button.dataset.name,
+            price: button.dataset.price
+        };
+        cart.push(item);
+        updateCart();
+
+        alert(`${item.name} ha sido añadido al carrito.`);
+    });
+});
+
+function removeFromCart(itemId) {
+    const index = cart.findIndex(item => item.id === itemId);
+    if (index > -1) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - ${item.price} $`;
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Eliminar';
+        removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'ml-2');
+        removeButton.addEventListener('click', () => removeFromCart(item.id));
+        li.appendChild(removeButton);
+        cartItems.appendChild(li);
+    });
+}
+
 /*Page CONTACTO*/
 
-//config de el boton
+//config de el boton de enviar
 let  botonEnviar = document.getElementById("boton-enviar")
 
 botonEnviar.addEventListener("click", ()=>alert("Sus datos han sido enviados satisfactoriamente"))
