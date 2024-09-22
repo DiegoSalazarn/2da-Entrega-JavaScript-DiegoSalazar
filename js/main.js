@@ -100,10 +100,13 @@ const stockPantalones = [
 
 /*Mi intento de un carrito de compras funcional*/ 
 
-const cart = [];
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Cargar el carrito al iniciar
+updateCart();
 
 // Añadir al carrito
-document.querySelectorAll('.add-to-cart').forEach(button=>{
+document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
         const item = {
             id: button.dataset.id,
@@ -112,7 +115,7 @@ document.querySelectorAll('.add-to-cart').forEach(button=>{
         };
         cart.push(item);
         updateCart();
-
+        
         alert(`${item.name} ha sido añadido al carrito.`);
     });
 });
@@ -138,6 +141,9 @@ function updateCart() {
         li.appendChild(removeButton);
         cartItems.appendChild(li);
     });
+    
+    // Guardar el carrito en localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 /*Page CONTACTO*/
